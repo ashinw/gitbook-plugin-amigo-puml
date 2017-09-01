@@ -3,7 +3,7 @@
     "amigo-puml@git+https://github.com/ashinw/gitbook-plugin-amigo-puml.git"
   ],
   "pluginsConfig": {
-    "plantuml": {
+    "amigo-puml": {
       "LOG_LEVEL": "11110",
       "JAVA_EXE": "java",
       "PLANTUML_JAR": "c:/Users/ashin/.vscode/extensions/jkeys089.plantuml-1.7.2/node_modules/node-plantuml/plantuml.jar"

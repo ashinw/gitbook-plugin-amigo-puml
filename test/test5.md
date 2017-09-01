@@ -9,4 +9,4 @@ class Test
 
 ## Filter testing
 
-{{"class Test" | plantuml(1, "two", param4=3, param5=false)}}
+{{"class Test" | plantuml(1, "two", param4=3, param5=false, -1)}}

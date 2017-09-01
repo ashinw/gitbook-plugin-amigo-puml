@@ -1,39 +1,40 @@
+import {AmigoPlantUmlPlugin} from './amigoPlantUmlPlugin';
 
-// Map of hooks
+let plugin = new AmigoPlantUmlPlugin();
+
 export let hooks = {
   'init': function () {
-    this.log.info('@@gitbook-plugin-amigo-uml::init');
+    plugin.configure(this);
+    plugin.init();
+  },
+
+  'finish:before': function () {
+    plugin.finishBefore();
   },
 
   'finish': function () {
-    this.log.info('@@gitbook-plugin-amigo-uml::finish');
+    plugin.finish();
   },
 
   'page:before': function (page) {
-    this.log.info('@@gitbook-plugin-amigo-uml::page:before');
-    return page;
+    return plugin.pageBefore(page);
   },
 
   'page': function (page) {
-    this.log.info('@@gitbook-plugin-amigo-uml::page:before');
-    return page;
+    return plugin.page(page);
   },
 }
 
-// Map of new blocks
 export let blocks = {
   plantuml: {
     process: function (blk) {
-      this.log.info('@@gitbook-plugin-amigo-uml::{% plantuml %} ... {% endplantuml %}');
-      return blk.body;
+      return plugin.processBlock(blk);      
     }
   }
 }
 
-// Map of new filters
 export let filters = {
   plantuml: function (lhsOperand, ...rhsOperands) {
-    this.log.info('@@gitbook-plugin-amigo-uml::{{lhsOperand | plantuml rhsOperands}}');
-    return `plantuml :: ${lhsOperand}, ${JSON.stringify(rhsOperands)}`;
+    return plugin.processFilter(lhsOperand, rhsOperands);
   }
 }
