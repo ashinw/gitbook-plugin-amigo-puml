@@ -14,7 +14,7 @@ book.json add the plugin
 ```
 {
   "plugins": [
-    "amigo-puml@git+https://github.com/ashinw/gitbook-plugin-amigo-puml.git#0.0.1"
+    "amigo-puml@git+https://github.com/ashinw/gitbook-plugin-amigo-puml.git"
   ]
 }
 ```

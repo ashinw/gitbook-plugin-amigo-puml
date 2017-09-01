@@ -1,0 +1,73 @@
+@startuml
+!include Class Diagram - Framework.pu
+
+hide empty members
+hide AbstractExtension members
+hide AbstractFeature
+
+class AmigoModeler {
+    #void _prepareFeatures()
+}
+
+class ExportModel {
+    ~ExportRenderer _renderer
+
+    #void _registerCommand()
+    -void _exportPlantUmlText()
+}
+
+class PreviewModel {
+    ~PreviewRenderer _renderer
+    ~PreviewProvider _provider  
+
+    +void onDidChangeConfiguration()
+    #void _readEditingLivePreviewConfiguration()
+    #void _setupExecutionContext()
+
+    #void _registerCommand()
+    #void _registerEventHandlers()
+}
+
+class ToggleLivePreview {
+    +void toggleOff()
+    #void _registerCommand()
+}
+
+class ImportTemplate {
+    +void onDidChangeConfiguration()
+    #void _readTemplateHomeConfiguration()
+    #void _setupExecutionContext()
+
+    #void _registerCommand()
+    #void _loadRegistry()
+    -void _selectTemplate()
+    -void _readTemplateFile()
+    -void _insertTemplateIntoEditor()
+}
+
+class InstallSupportSoftware {
+    #void _setupExecutionContext()
+
+    #void _registerCommand()
+    #void _downloadSupportLibraries()
+}
+
+AbstractExtension <|-- AmigoModeler
+
+AbstractCommand <|-- PreviewModel
+AbstractCommand <|-- ToggleLivePreview
+AbstractCommand <|-- ExportModel
+AbstractCommand <|-- ImportTemplate
+AbstractCommand <|-- InstallSupportSoftware
+
+AmigoModeler *--> "_previewer" PreviewModel
+AmigoModeler *--> "_exporter" ExportModel
+AmigoModeler *--> "_importer" ImportTemplate
+AmigoModeler *--> "_softwareInstaller" InstallSupportSoftware
+
+PreviewModel *-- "_toggler" ToggleLivePreview
+
+InstallSupportSoftware ..> DownloadFileState 
+
+caption Figure Amigo PlantUML Modeler core abstractions class diagram
+@enduml

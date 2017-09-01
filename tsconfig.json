@@ -8,7 +8,7 @@
         "target": "es5",
         "noImplicitAny": false,
         "sourceMap": true,
-        "outDir": "node_modules/gitbook-plugin-amigo-puml",
+        "outDir": "./test/node_modules/gitbook-plugin-amigo-puml/",
         "rootDir": "./src"
     }
 }

@@ -1,0 +1,57 @@
+@startuml
+hide empty attributes
+hide empty methods
+
+abstract class AbstractFeature {
+    +void activate()
+    +void deactivate()
+    +void onDidChangeConfiguration()
+
+    #void _registerListeners()
+    #void _setupExecutionContext()
+
+    {static} +void downloadFile()
+    {static} +void copyFile()    
+}
+
+abstract class AbstractCommand {
+    {abstract} #void _registerCommand()
+    #void _registerEventHandlers()
+    #void _registerListeners()
+
+    #void _registerCmd()
+    #void _registerTextEditorCmd()
+}
+
+abstract class AbstractExtension {
+    {static} +NAMESPACE
+    {static} +SHOW_DIAG
+    
+    +void activate()
+    +void deactivate()
+    +void onDidChangeConfiguration()
+
+    {abstract} #void _prepareFeatures()
+    #void _prepareListeners()
+
+    {static} +void showToastMessage()
+    {static} +void showErrorMessage()
+    {static} +void showWarningMessage()
+    {static} +void showInformationMessage()    
+}
+
+enum DownloadFileState {
+  ALREADY_EXISTS,
+  DOWNLOADED,
+  WRITER_ERROR,
+  HTTP_NOT_OK,
+  CONNECTION_ERROR  
+}
+
+AbstractFeature <|-right- AbstractCommand 
+AbstractFeature .left.> DownloadFileState 
+AbstractCommand ..> AbstractExtension 
+
+AbstractExtension "_extension" o--> "_features 1..*" AbstractFeature : codified components
+caption Figure Amigo PlantUML Modeler framework class diagram
+@enduml
